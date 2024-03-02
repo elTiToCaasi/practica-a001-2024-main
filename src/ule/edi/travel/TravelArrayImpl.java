@@ -151,9 +151,13 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public boolean isAdvanceSale(Person p) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isadvancedsale = false;
+		if (this.isAdvanceSale(p)) {
+			isadvancedsale = true;
+		}
+		return isadvancedsale;
 	}
+
 
 	@Override
 	public Date getTravelDate() {
@@ -198,7 +202,11 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public int getPosPerson(String nif) {
-		// TODO Auto-generated method stub
+	int contador=0;
+	for(int i =0;i<nSeats;i++) {
+		if(seats[i-1])
+
+	}
 		return 0;
 	}
 
