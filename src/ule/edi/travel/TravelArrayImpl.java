@@ -104,11 +104,9 @@ public class TravelArrayImpl implements Travel {
 		Person pasajero=null ;
 		if(this.seats[pos-1]!=null){
 			pasajero=this.seats[pos-1].getHolder();
+		}
 			this.seats[pos-1]=null;
 
-		}else{
-			this.seats[pos-1]=null;                                                                                                                                                                                                                                                                                                                                                                                                    
-		}
 		return pasajero;
 	}
 	private boolean isChildren(int age) {
@@ -129,7 +127,6 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public List<Integer> getAvailableSeatsList() {
-		// TODO Auto-generated method stub
 		List<Integer> lista = new ArrayList<Integer>(nSeats);
 
 		return lista;
@@ -166,10 +163,13 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public boolean sellSeatPos(int pos, String nif, String name, int edad, boolean isAdvanceSale) {
-		boolean sellseat=true;
 		Person holder= new Person(nif, name, edad);
-		
-		return false;
+		boolean sellseat=false;
+		for(int i =0; i<this.nSeats;i++)
+			if(this.seats[i-1]==null)
+				Person holder=new Person
+
+		return sellseat;
 	}
 
 	@Override
@@ -190,6 +190,7 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public int getNumberOfAdults() {
+
 		return this.getNumberOfSoldSeats()-this.getNumberOfChildren();
 	}
 
@@ -202,11 +203,7 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public int getPosPerson(String nif) {
-	int contador=0;
-	for(int i =0;i<nSeats;i++) {
-		if(seats[i-1])
-
-	}
+		//TODO
 		return 0;
 	}
 
@@ -218,7 +215,12 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public int sellSeatRearPos(String nif, String name, int edad, boolean isAdvanceSale) {
-		// TODO Auto-generated method stub
+		int retur=0;
+		for(int i=nSeats;i<1;i--){
+			if(i!=null)
+		}
+
+
 		return 0;
 	}
 
@@ -230,6 +232,7 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public double getPrice() {
+
 		return this.price;
 	}
 
