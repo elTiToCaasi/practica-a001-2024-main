@@ -129,7 +129,7 @@ public class TravelArrayImpl implements Travel {
 	public List<Integer> getAvailableSeatsList() {
 		List<Integer> lista = new ArrayList<Integer>(nSeats);
 
-		return lista;
+		return lista ;
 	}
 
 	@Override
