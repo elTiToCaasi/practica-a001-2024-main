@@ -149,11 +149,8 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public boolean isAdvanceSale(Person p) {
-		boolean isadvancedsale = false;
-		if (this.isAdvanceSale(p)) {
-			isadvancedsale = true;
-		}
-		return isadvancedsale;
+		boolean isadvancedsale = this.isAdvanceSale(p);
+        return isadvancedsale;
 	}
 
 
@@ -169,12 +166,12 @@ public class TravelArrayImpl implements Travel {
 		boolean pillado=false;
 		int asiento=0;
 		do{
-			if(holder.equals(seats[asiento].getHolder()) && seats[asiento]!=null){
+			if( seats[asiento]!=null && holder.equals(seats[asiento].getHolder()) ){
 		pillado=true;
 			}
 			asiento++;
 		}while(asiento>=0 && asiento<this.nSeats);
-		if(this.seats[pos-1]==null && 0<pos && pos<=this.getNumberOfSeats()){
+		if(0<pos && pos<=this.getNumberOfSeats()&&this.seats[pos-1]==null){
 			sellseat=true;
 			Person pasajero= new Person(nif,name,edad);
 			seats[pos-1]=new Seat(isAdvanceSale, pasajero);
@@ -239,21 +236,34 @@ public class TravelArrayImpl implements Travel {
 	}
 	@Override
 	public int sellSeatRearPos(String nif, String name, int edad, boolean isAdvanceSale) {
-		int seatrearpos=0;
-		int retur=1;
-		return 0;
+		int seatrearpos=-1;
+		int asiento=this.getNumberOfSeats();
+		Person pasajero= new Person(nif,name, edad ) ;
+		if(this.getNumberOfSeats()>0) {
+			seatrearpos=this.getNumberOfSeats();
+			do{
+				seatrearpos--;
+				asiento--;
+			}while(seats[asiento-1]!=null);
+			seats[asiento-1]=new Seat(isAdvanceSale, pasajero);
+		}
+		return seatrearpos;
 	}
 
 
 	@Override
 	public Double getSeatPrice(Seat seat) {
-		// TODO Auto-generated method stub
-		return 0.0;
+	Double setprice=0.0;
+	if (!seat.getAdvanceSale()) {
+		setprice = this.getPrice();
+	}else{
+		setprice=this.getPrice()* 1 / 100 * (100 - this.discountAdvanceSale);
+	}
+	return setprice;
 	}
 
 	@Override
 	public double getPrice() {
-
 		return this.price;
 	}
 
