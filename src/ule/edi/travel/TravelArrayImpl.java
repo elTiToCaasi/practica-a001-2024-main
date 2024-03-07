@@ -55,7 +55,7 @@ public class TravelArrayImpl implements Travel {
 	public int getNumberOfNormalSaleSeats() {
 		int contador=0;
 		for (int i = 0; i < this.nSeats; i++) {
-			if (!seats[i].getAdvanceSale()) {
+			if (seats [i]!=null&&!seats[i].getAdvanceSale()) {
 				contador++;
 
 			}
@@ -67,8 +67,8 @@ public class TravelArrayImpl implements Travel {
 	public int getNumberOfAdvanceSaleSeats() {
 		int contador=0;
 		for (int i = 0; i < this.nSeats; i++) {
-			if (seats[i].getAdvanceSale()) {
-				contador++;
+			if (seats[i]!=null && seats[i].getAdvanceSale()) {
+				contador=contador+1;
 
 			}
 		}
@@ -103,10 +103,10 @@ public class TravelArrayImpl implements Travel {
 	@Override
 	public Person refundSeat(int pos) {
 		Person pasajero=null ;
-		if(this.seats[pos-1]!=null){
+		if( pos>0 && pos<nSeats &&this.seats[pos-1]!=null){
 			pasajero=this.seats[pos-1].getHolder();
-		}
 			this.seats[pos-1]=null;
+		}
 
 		return pasajero;
 	}
@@ -129,15 +129,23 @@ public class TravelArrayImpl implements Travel {
 	@Override
 	public List<Integer> getAvailableSeatsList() {
 		List<Integer> lista = new ArrayList<Integer>(nSeats);
+		for(int i=0;i<nSeats;i++){
+			if(seats[i]==null){
+				lista.add(i+1);
+			}
+		}
 
 		return lista  ;
 	}
 
 	@Override
 	public List<Integer> getAdvanceSaleSeatsList() {
-		// TODO Auto-generated method stub
 		List<Integer> lista = new ArrayList<Integer>(nSeats);
-
+		for(int i=0;i<nSeats;i++){
+			if(this.seats[i]!=null &&this.seats[i].getAdvanceSale()){
+				lista.add(i+1);
+			}
+		}
 		return lista;
 	}
 
@@ -149,8 +157,13 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public boolean isAdvanceSale(Person p) {
-		boolean isadvancedsale = this.isAdvanceSale(p);
-        return isadvancedsale;
+		boolean isadvancedsale = false;
+		for(int i=0;i<nSeats;i++){
+			if(this.seats[i]!=null && this.seats[i].getHolder().equals(p) && this.seats[i].getAdvanceSale()){
+				isadvancedsale=true;
+			}
+		}
+		return isadvancedsale;
 	}
 
 
@@ -170,7 +183,7 @@ public class TravelArrayImpl implements Travel {
 		pillado=true;
 			}
 			asiento++;
-		}while(asiento>=0 && asiento<this.nSeats);
+		}while(asiento > 0 && asiento<this.nSeats);
 		if(0<pos && pos<=this.getNumberOfSeats()&&this.seats[pos-1]==null){
 			sellseat=true;
 			Person pasajero= new Person(nif,name,edad);
@@ -205,9 +218,13 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public Double getCollectionTravel() {
-		// TODO Auto-generated method stub
-
-		return 0.0;
+		Double recaudacion =0.0;
+		for(int i=0;i<nSeats;i++){
+			if(seats[i]!=null){
+				recaudacion=recaudacion+this.getSeatPrice(seats[i]);
+			}
+		}
+		return recaudacion;
 	}
 
 	@Override

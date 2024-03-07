@@ -43,17 +43,19 @@ public class Person {
 	public String toString() {
 		return "{ NIF: "+ nif + "  Name : " + name + ", Age:" + age + "}";
 	}
-	
-    @Override
+
+	@Override
 	public boolean equals(Object obj) {
-	if (this==obj) {
-	return true;
+		boolean equals=false;
+		if(this==obj) {
+			equals= true;
+		}
+		if (obj instanceof Person) {
+			Person other = (Person) obj;
+			equals= (this.nif.equals(other.nif));
+		}
+		return equals;
 	}
-	if (obj instanceof Person) {
-	Person other = (Person) obj;
-	return (this.nif.equals(other.nif));
-	}
-	return false;
-	}
-	
+
 }
+
