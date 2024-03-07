@@ -151,8 +151,18 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public int getMaxNumberConsecutiveSeats() {
-		// TODO Auto-generated method stub
-		return 0;
+	int max=0;
+	int contador=0;
+	for(int i=0;i<this.nSeats;i++){
+		if(seats[i]==null){
+			contador++;
+			max=Math.max(max, contador);
+		}else{
+			contador=0;
+
+		}
+	}
+	return max;
 	}
 
 	@Override
