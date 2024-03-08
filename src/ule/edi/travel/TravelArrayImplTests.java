@@ -180,6 +180,17 @@ public class TravelArrayImplTests {
 		Assert.assertEquals(3,ep.getPosPerson("10203040A"));
 
 	}
+	public void testgetDiscountAdvanceSale() throws Exception {
+        Assert.assertEquals(25, (byte) e.getDiscountAdvanceSale());
+	}
+	public void testgetNumberofSoldSeatsVacio()throws Exception{
+		Assert.assertEquals(0,e.getNumberOfSoldSeats());
+		Assert.assertEquals(0,ep.getNumberOfSoldSeats());
+	}
+	public void testgetNumberofSoldSeatsLleno()throws Exception{
+		Assert.assertEquals(110,e.getNumberOfSoldSeats());
+		Assert.assertEquals(4,e.getNumberOfSoldSeats());
+	}
 
 
 
