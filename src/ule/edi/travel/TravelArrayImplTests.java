@@ -29,7 +29,19 @@ public class TravelArrayImplTests {
 		ep = new TravelArrayImpl(parseLocalDate("24/02/2020 17:00:00"), 4);
 
 	}
+	@Test
+	public void testgetDiscountAdvanceSale() throws Exception {
+		Assert.assertEquals(25, (byte) e.getDiscountAdvanceSale());
+	}
+	@Test
+	public void testgetNumberofSoldSeatsVacio()throws Exception{
+		Assert.assertEquals(0,e.getNumberOfSoldSeats());
+		Assert.assertEquals(0,ep.getNumberOfSoldSeats());
+	}
+	@Test
+	public void testgetNumberofNormalSeats() throws Exception{
 
+	}
 	@Test
 	public void testEventoVacio() throws Exception {
 
@@ -180,18 +192,6 @@ public class TravelArrayImplTests {
 		Assert.assertEquals(3,ep.getPosPerson("10203040A"));
 
 	}
-	public void testgetDiscountAdvanceSale() throws Exception {
-        Assert.assertEquals(25, (byte) e.getDiscountAdvanceSale());
-	}
-	public void testgetNumberofSoldSeatsVacio()throws Exception{
-		Assert.assertEquals(0,e.getNumberOfSoldSeats());
-		Assert.assertEquals(0,ep.getNumberOfSoldSeats());
-	}
-	public void testgetNumberofSoldSeatsLleno()throws Exception{
-		Assert.assertEquals(110,e.getNumberOfSoldSeats());
-		Assert.assertEquals(4,e.getNumberOfSoldSeats());
-	}
-
 
 
 

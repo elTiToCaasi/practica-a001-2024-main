@@ -270,7 +270,7 @@ public class TravelArrayImpl implements Travel {
 	public int sellSeatRearPos(String nif, String name, int edad, boolean isAdvanceSale) {
 		int seatrearpos=-1;
 		int asiento=this.getNumberOfSeats()-1;
-		Person pasajero= new Person(nif,name, edad ) ;
+		Person pasajero= new Person(nif,name, edad) ;
 		if(this.getNumberOfSeats()>0) {
 			seatrearpos=this.getNumberOfSeats();
 			while(seats[asiento]!=null){
