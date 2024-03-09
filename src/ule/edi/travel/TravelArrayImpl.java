@@ -67,9 +67,11 @@ public class TravelArrayImpl implements Travel {
 	public int getNumberOfAdvanceSaleSeats() {
 		int contador=0;
 		for (int i = 0; i < this.nSeats; i++) {
-			if (seats[i]!=null && seats[i].getAdvanceSale()) {
-				contador++;
+			if (seats[i]!=null) {
+				if(this.seats[i].getAdvanceSale()){
+					contador++;
 
+				}
 			}
 		}
 		return contador;
@@ -83,20 +85,16 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public int getNumberOfAvailableSeats() {
-		int contador = 0;
-		for (int i = 0; i < this.nSeats; i++) {
-			if (seats[i] == null) {
-				contador++;
-			}
-		}
-		return contador;
+		return this.getNumberOfSeats()-this.getNumberOfSoldSeats();
 	}
 
 	@Override
 	public Seat getSeat(int pos) {
-		Seat pos1=null;	
-		if(pos>0&&pos<=nSeats){
-		pos1=seats[pos-1];
+		Seat pos1=null;
+		if(pos>0){
+			if(pos<this.getNumberOfSeats()){
+				pos1=seats[pos-1];
+			}
 	}
 	return pos1;
 	}
@@ -114,7 +112,7 @@ public class TravelArrayImpl implements Travel {
 		boolean child = false;
 		if (age < CHILDREN_EXMAX_AGE) {
 			child = true;
-		} 
+		}
 		return child;
 	}
 
@@ -250,36 +248,30 @@ public class TravelArrayImpl implements Travel {
 
 	@Override
 	public int sellSeatFrontPos(String nif, String name, int edad, boolean isAdvanceSale) {
-		int retur=-1;
-		Person holder= new Person(nif,name,edad);
-		int asiento=0;
-		if(0<this.getNumberOfAvailableSeats()) {
-			retur=1;
 
-			do {
-				asiento++;
-				retur++;
+		for(int i = 0; i <  this.nSeats; i++) {
+			if(this.seats[i] == null) {
+				Person newPerson = new Person(nif,name,edad);
+				Seat newSeat = new Seat(isAdvanceSale, newPerson);
+				this.seats[i] = newSeat;
+				return i + 1;
 
-			} while (seats[asiento]!=null);
-			seats[asiento]=new Seat(isAdvanceSale, holder);
+			}
 		}
-
-		return retur;
+		return -1;
 	}
 	@Override
-	public int sellSeatRearPos(String nif, String name, int edad, boolean isAdvanceSale) {
-		int seatrearpos=-1;
-		int asiento=this.getNumberOfSeats()-1;
-		Person pasajero= new Person(nif,name, edad) ;
-		if(this.getNumberOfSeats()>0) {
-			seatrearpos=this.getNumberOfSeats();
-			while(seats[asiento]!=null){
-				seatrearpos--;
-				asiento--;
+	public int sellSeatRearPos(String nif, String name, int edad, boolean isAdvanceSale){
+		for(int i = this.nSeats - 1; i >= 0; i--) {
+			if (this.seats[i] == null) {
+				Person pasajero = new Person(nif, name, edad);
+				Seat asiento = new Seat(isAdvanceSale, pasajero);
+				this.seats[i] = asiento;
+				return i + 1;
 			}
-			seats[asiento]=new Seat(isAdvanceSale, pasajero);
 		}
-		return seatrearpos;
+
+		return -1;
 	}
 
 
