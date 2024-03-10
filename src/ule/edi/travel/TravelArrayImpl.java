@@ -192,7 +192,7 @@ public class TravelArrayImpl implements Travel {
 			}
 			asiento++;
 		}while(asiento > 0 && asiento<this.nSeats);
-		if(0<pos && pos<=this.getNumberOfSeats()&&this.seats[pos-1]==null){
+		if(0<pos && pos<=this.getNumberOfSeats()&&this.seats[pos-1]==null &&!pillado){
 			sellseat=true;
 			Person pasajero= new Person(nif,name,edad);
 			seats[pos-1]=new Seat(isAdvanceSale, pasajero);

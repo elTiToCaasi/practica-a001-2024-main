@@ -39,9 +39,60 @@ public class TravelArrayImplTests {
 		Assert.assertEquals(0,ep.getNumberOfSoldSeats());
 	}
 	@Test
-	public void testgetNumberofNormalSeats() throws Exception{
+	public void testnumberofNormalSeatsFalse() throws Exception{
+		Assert.assertEquals(0, e.getNumberOfNormalSaleSeats());
+		Assert.assertTrue(e.sellSeatPos(2,"02773544C","Isaac Caño",18,false));
+		Assert.assertEquals(1,e.getNumberOfNormalSaleSeats());
+	}
+	@Test
+	public void testfalseNumberofNormalSeatsepTrue() throws Exception{
+		Assert.assertEquals(0, ep.getNumberOfNormalSaleSeats());
+		Assert.assertTrue(ep.sellSeatPos(2,"02773544C","Isaac Caño",18,true));
+		Assert.assertEquals(0,ep.getNumberOfNormalSaleSeats());
+	}
+	@Test
+	public void testgetNumberofAdvancedsaleTrue() throws Exception{
+		Assert.assertEquals(0, ep.getNumberOfAdvanceSaleSeats());
+		Assert.assertTrue(ep.sellSeatPos(2,"02773544C","Isaac Caño",18,true));
+		Assert.assertEquals(1,ep.getNumberOfAdvanceSaleSeats());
+	}
+	@Test
+	public void testgetNumberofAdvancedSaleFalse() throws  Exception{
+		Assert.assertEquals(0, ep.getNumberOfAdvanceSaleSeats());
+		Assert.assertTrue(ep.sellSeatPos(2,"02773544C","Isaac Caño",18,false));
+		Assert.assertEquals(0,ep.getNumberOfAdvanceSaleSeats());
+	}
+	@Test
+	public void testgetNumberOfSeats() throws Exception{
+		Assert.assertEquals(110,e.getNumberOfSeats());
+		Assert.assertEquals(4,ep.getNumberOfSeats());
+	}
+	@Test
+	public void testgetAvailableSeatse() throws Exception{
+		Assert.assertTrue(e.sellSeatPos(2,"02773544C","Isaac Caño",18,false));
+		Assert.assertEquals(1,e.getNumberOfSoldSeats());
+		Assert.assertEquals(109,e.getNumberOfAvailableSeats());
 
 	}
+	@Test
+	public void testgetAvailableSeatsep() throws Exception{
+		Assert.assertTrue(ep.sellSeatPos(2,"02773544C","Isaac Caño",18,false));
+		Assert.assertEquals(1,ep.getNumberOfSoldSeats());
+		Assert.assertEquals(3,ep.getNumberOfAvailableSeats());
+
+	}
+	@Test
+	public void testgetSeat() throws Exception{
+		Assert.assertNull(ep.getSeat(1));
+		Assert.assertNull(e.getSeat(1));
+		Assert.assertNull(ep.getSeat(0));
+		Assert.assertNull(e.getSeat(0));
+		Assert.assertNull(ep.getSeat(69));
+		Assert.assertNull(e.getSeat(69));
+	}
+
+
+
 	@Test
 	public void testEventoVacio() throws Exception {
 
