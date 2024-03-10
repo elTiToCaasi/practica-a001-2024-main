@@ -121,11 +121,67 @@ public class TravelArrayImplTests {
 		Assert.assertEquals(2,ep.getMaxNumberConsecutiveSeats());
 	}
 	@Test
-	public void testgetNumberofAdultsandChild() throws Exception{
-		Assert.assertTrue(ep.sellSeatPos(1,"02773544C","Isaac Caño",15,false));
-		Assert.assertTrue(ep.sellSeatPos(2,"02773544","Isaac Caño",10,false));
-		Assert.assertTrue(ep.sellSeatPos(3,"0277354","Isaac Caño",19,false));
-		Assert.assertTrue(ep.sellSeatPos(4,"027735","Isaac Caño",45,false));
+	public void testgetNumberofAdultsandChild() throws Exception {
+		Assert.assertTrue(ep.sellSeatPos(1, "02773544C", "Isaac Caño", 15, false));
+		Assert.assertTrue(ep.sellSeatPos(2, "02773544", "Isaac Caño", 10, false));
+		Assert.assertTrue(ep.sellSeatPos(3, "0277354", "Isaac Caño", 19, false));
+		Assert.assertTrue(ep.sellSeatPos(4, "027735", "Isaac Caño", 45, false));
+		Assert.assertEquals(2, ep.getNumberOfAdults());
+		Assert.assertEquals(2, ep.getNumberOfChildren());
+	}
+	@Test
+	public void testsellSeat() throws Exception{
+		Assert.assertTrue(e.sellSeatPos(1,"02773544C","Isaac Caño",18,true));
+	}
+	@Test
+	public void testgetposperson1() throws Exception{
+		Assert.assertTrue(ep.sellSeatPos(1, "02773544C", "Isaac Caño", 15, false));
+		Assert.assertEquals(1,ep.getPosPerson("02773544C"));
+	}
+	@Test
+	public void testgetposperson2() throws Exception{
+		Assert.assertTrue(ep.sellSeatPos(1, "02773544C", "Isaac Caño", 15, false));
+		Assert.assertEquals(-1,ep.getPosPerson("0"));
+	}
+	@Test
+	public void testSeatPrice() throws Exception{
+		Assert.assertTrue(ep.sellSeatPos(1, "02773544C", "Isaac Caño", 15, false));
+		Assert.assertTrue(ep.sellSeatPos(2, "02773544", "Isaac Caño", 10, true));
+		Assert.assertEquals(75.00,0.0,ep.getSeatPrice(ep.getSeat(2)));
+		Assert.assertEquals(100.00,0.0,ep.getSeatPrice(ep.getSeat(1)));
+	}
+	@Test
+	public void testgetlist() throws Exception {
+		Assert.assertTrue(ep.sellSeatPos(1, "02773544C", "Isaac Caño", 15, false));
+		Assert.assertTrue(ep.sellSeatPos(3, "0277354", "Isaac Caño", 19, false));
+		Assert.assertTrue(ep.sellSeatPos(4, "027735", "Isaac Caño", 45, false));
+		Assert.assertEquals("[2]", ep.getAvailableSeatsList().toString());
+	}
+	@Test
+ public void testSellFrontvacio() throws Exception{
+	 Assert.assertEquals(1,e.sellSeatFrontPos("02773544C","Isaac Caño",18,true));
+ }
+ 	@Test
+	public void testSellfronlleno() throws Exception{
+		Assert.assertTrue(ep.sellSeatPos(1, "02773544C", "Isaac Caño", 15, false));
+		Assert.assertTrue(ep.sellSeatPos(2, "02773544", "Isaac Caño", 10, false));
+		Assert.assertTrue(ep.sellSeatPos(3, "0277354", "Isaac Caño", 19, false));
+		Assert.assertTrue(ep.sellSeatPos(4, "027735", "Isaac Caño", 45, false));
+		Assert.assertEquals(-1,ep.sellSeatFrontPos("027","Isaac Caño",18,true));
+	}
+	@Test
+	public void testsellrear1() throws Exception{
+		Assert.assertEquals(110,e.sellSeatRearPos("02773544C","Isaac Caño Calvo",18,true));
+	}
+	@Test
+	public void testsellrear2() throws Exception{
+		Assert.assertTrue(ep.sellSeatPos(1, "02773544C", "Isaac Caño", 15, false));
+		Assert.assertTrue(ep.sellSeatPos(2, "02773544", "Isaac Caño", 10, false));
+		Assert.assertTrue(ep.sellSeatPos(3, "0277354", "Isaac Caño", 19, false));
+		Assert.assertTrue(ep.sellSeatPos(4, "027735", "Isaac Caño", 45, false));
+		Assert.assertEquals(-1,ep.sellSeatRearPos("02773544C","Isaac Caño",18,true));
+	}
+
 	@Test
 	public void testEventoVacio() throws Exception {
 
@@ -155,6 +211,10 @@ public class TravelArrayImplTests {
 		Assert.assertEquals(2, e2.getNumberOfSoldSeats());
 
 		Assert.assertEquals(360.0,0.0,e2.getCollectionTravel());
+	}
+	@Test
+	public void testgetcollectionVacio() throws Exception{
+		Assert.assertTrue(0==ep.getCollectionTravel());
 	}
 
 	// test getDiscountAdvanceSale
