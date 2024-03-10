@@ -30,6 +30,18 @@ public class TravelArrayImplTests {
 
 	}
 	@Test
+	public void testEqualsFalse() throws Exception{
+		Person pasajero=new Person("02773544C","Isaac Caño",18);
+		Person pasajero1=new Person("0C","Isaac Caño",18);
+		Assert.assertFalse(pasajero1.equals(pasajero));
+	}
+	@Test
+	public void testEqualsTrue() throws Exception{
+		Person pasajero=new Person("02773544C","Isaac Caño",18);
+		Person pasajero1=new Person("02773544C","Isaac Caño",18);
+		Assert.assertTrue(pasajero1.equals(pasajero));
+	}
+	@Test
 	public void testgetDiscountAdvanceSale() throws Exception {
 		Assert.assertEquals(25, (byte) e.getDiscountAdvanceSale());
 	}
@@ -90,18 +102,38 @@ public class TravelArrayImplTests {
 		Assert.assertNull(ep.getSeat(69));
 		Assert.assertNull(e.getSeat(69));
 	}
-
-
-
+	@Test
+	public void falseIsAdvanceSale() throws Exception{
+		Person pasajero=new Person("02773544C","Isaac Caño",18);
+		Assert.assertTrue(e.sellSeatPos(2,"02773544C","Isaac Caño",18,false));
+		Assert.assertFalse(e.isAdvanceSale(pasajero));
+	}
+	@Test
+	public void trueIsAdvanceSale() throws Exception{
+		Person pasajero=new Person("02773544C","Isaac Caño",18);
+		Assert.assertTrue(e.sellSeatPos(2,"02773544C","Isaac Caño",18,true));
+		Assert.assertTrue(e.isAdvanceSale(pasajero));
+	}
+	@Test
+	public void testMaxSeats() throws Exception{
+		Assert.assertTrue(ep.sellSeatPos(1,"02773544C.","Isaac Caño",18,false));
+		Assert.assertTrue(ep.sellSeatPos(2,"02773544D.","Isaac Cano",18,false));
+		Assert.assertEquals(2,ep.getMaxNumberConsecutiveSeats());
+	}
+	@Test
+	public void testgetNumberofAdultsandChild() throws Exception{
+		Assert.assertTrue(ep.sellSeatPos(1,"02773544C","Isaac Caño",15,false));
+		Assert.assertTrue(ep.sellSeatPos(2,"02773544","Isaac Caño",10,false));
+		Assert.assertTrue(ep.sellSeatPos(3,"0277354","Isaac Caño",19,false));
+		Assert.assertTrue(ep.sellSeatPos(4,"027735","Isaac Caño",45,false));
 	@Test
 	public void testEventoVacio() throws Exception {
 
-		Assert.assertTrue(e.getNumberOfAvailableSeats()==110);
+		Assert.assertTrue(e.getNumberOfAvailableSeats() == 110);
 		Assert.assertEquals(110, e.getNumberOfAvailableSeats());
 		Assert.assertEquals(0, e.getNumberOfAdults());
 		Assert.assertEquals(0, e.getNumberOfChildren());
-		Assert.assertEquals(100.0,0.0, e.getPrice());
-
+		Assert.assertEquals(100.0, 0.0, e.getPrice());
 	}
 
 	// test 2 constructor
