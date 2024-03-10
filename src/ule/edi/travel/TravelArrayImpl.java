@@ -152,7 +152,7 @@ public class TravelArrayImpl implements Travel {
 	int max=0;
 	int contador=0;
 	for(int i=0;i<this.nSeats;i++){
-		if(seats[i]!=null){
+		if(seats[i]==null){
 			contador++;
 			max=Math.max(max, contador);
 		}else{
